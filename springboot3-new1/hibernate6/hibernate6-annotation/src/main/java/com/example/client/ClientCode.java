@@ -51,24 +51,6 @@ public class ClientCode {
 		}
 	}
 	
-	public <T> List<T> nativeQueryList(String nativeSql, Object... params) {
-	    Query q = createNativeQuery(nativeSql, params);
-	    q.unwrap(NativeQueryImpl.class)
-	            .setTupleTransformer(Transformers.TO_LIST)
-	            .setResultListTransformer(Transformers.TO_LIST);
-	    return q.getResultList();
-	}
-
-	private Query createNativeQuery(String sql, Session session, Object... params) {
-	    Query q = session.createNativeMutationQuery(sql);
-	    if (params != null && params.length > 0) {
-	        for (int i = 0; i < params.length; i++) {
-	            q.setParameter(i + 1, params[i]);
-	        }
-	    }
-	    return q;
-	}
-
 }
 
 
